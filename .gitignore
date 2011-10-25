@@ -1,0 +1,7 @@
+target
+*.log
+.settings
+.metadata
+.directory
+.settings
+.project

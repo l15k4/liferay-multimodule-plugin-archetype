@@ -1,0 +1,11 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <bean id="${package}.service.HelloService" class="${package}.service.impl.HelloServiceImpl"/>
+    <bean id="${package}.service.HelloServiceUtil" class="${package}.service.HelloServiceUtil">
+        <property name="service" ref="${package}.service.HelloService"/>
+    </bean>
+</beans>
