@@ -6,7 +6,8 @@
 		<portlet-name>1</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
-		<css-class-wrapper>hello-portlet</css-class-wrapper>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
