@@ -1,23 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>${artifactId}</artifactId>
-    <packaging>war</packaging>
-    <name>Service Implementation</name>
-	
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>war</packaging>
+	<name>Service Implementation</name>
+
 	<parent>
-        <groupId>${groupId}</groupId>
-        <artifactId>${rootArtifactId}</artifactId>
-        <version>${version}</version>
-    </parent>
-	
+		<groupId>${groupId}</groupId>
+		<artifactId>${rootArtifactId}</artifactId>
+		<version>${version}</version>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<!-- jar goal must be attached to package phase because this artifact is WAR and we need additional package -->
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+						<!-- 
+						    classifier must be specified because we specify 2 ${artifactId} dependencies in Portlet module, 
+							they differ in type jar/war, but maven requires classifier in this case
+						-->
+							<classifier>classes</classifier>
+							<includes>
+								<include>**/**.class</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
-        <dependency>
-            <groupId>com.liferay.portal</groupId>
-            <artifactId>portal-service</artifactId>
-            <version>${liferay.version}</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>com.liferay.portal</groupId>
+			<artifactId>portal-service</artifactId>
+			<version>${liferay.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!--  Interfaces and Facades -->
 		<dependency>
 			<groupId>${groupId}</groupId>
 			<artifactId>${rootArtifactId}-service</artifactId>
@@ -25,5 +56,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 </project>

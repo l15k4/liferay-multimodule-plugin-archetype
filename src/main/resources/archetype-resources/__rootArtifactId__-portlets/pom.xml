@@ -1,23 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>${artifactId}</artifactId>
-    <packaging>war</packaging>
-    <name>Portlets</name>
-	
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>${artifactId}</artifactId>
+	<packaging>war</packaging>
+	<name>Portlets</name>
+
 	<parent>
-        <groupId>${groupId}</groupId>
-        <artifactId>${rootArtifactId}</artifactId>
-        <version>${version}</version>
-    </parent>
-	
+		<groupId>${groupId}</groupId>
+		<artifactId>${rootArtifactId}</artifactId>
+		<version>${version}</version>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<dependentWarExcludes>WEB-INF/web.xml,**/**.class</dependentWarExcludes>
+					<webResources>
+						<resource>
+							<!--  change if necessary -->
+							<directory>src/main/webapp/WEB-INF</directory>
+							<filtering>true</filtering>
+							<targetPath>WEB-INF</targetPath>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
-        <dependency>
-            <groupId>javax.portlet</groupId>
-            <artifactId>portlet-api</artifactId>
-            <version>${portlet-api.version}</version>
-            <scope>provided</scope>
-        </dependency>
+
+		<!-- 
+		     compile time and runtime dependency 
+			 WEB-INF/lib/${rootArtifactId}-service-${version}.jar
+		-->
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${rootArtifactId}-service</artifactId>
+			<version>${version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<!-- 
+		     compile time and runtime dependency - contains only classes !
+			 WEB-INF/lib/${rootArtifactId}-service-impl-${version}.jar
+		-->
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${rootArtifactId}-service-impl</artifactId>
+			<version>${version}</version>
+			<classifier>classes</classifier>
+			<type>jar</type>
+		</dependency>
+		
+		<!-- 
+		     maven-war-plugin's Overlays merges all assets 
+		     of this WAR with Portlet WAR except for dependentWarExcludes
+		-->
+		<dependency>
+			<groupId>${groupId}</groupId>
+			<artifactId>${rootArtifactId}-service-impl</artifactId>
+			<version>${version}</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+			<version>${portlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
@@ -42,12 +99,7 @@
 			<version>${liferay.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>${groupId}</groupId>
-			<artifactId>${rootArtifactId}-service</artifactId>
-			<version>${version}</version>
-			<scope>provided</scope>
-		</dependency>
+
 	</dependencies>
-	
+
 </project>
