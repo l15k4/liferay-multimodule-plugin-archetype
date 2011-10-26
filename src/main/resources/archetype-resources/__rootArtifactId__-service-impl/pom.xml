@@ -17,6 +17,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
 				<!-- jar goal must be attached to package phase because this artifact is WAR and we need additional package -->
 				<executions>
 					<execution>
@@ -45,6 +46,7 @@
 				<configuration>
 					<apiDir>${basedir}/../${rootArtifactId}-service/src/main/java</apiDir>
 					<pluginType>portlet</pluginType>
+					<postBuildDependencyModules>false</postBuildDependencyModules>
 				</configuration>
 			</plugin>
 
