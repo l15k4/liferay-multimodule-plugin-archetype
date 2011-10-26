@@ -13,7 +13,7 @@ import com.liferay.portal.util.PortalUtil;
 import ${package}.service.HelloService;
 
 public abstract class HelloServiceBaseImpl extends PrincipalBean implements HelloService {
-    @BeanReference(name = "${package}.service.HelloService.impl")
+    @BeanReference(name = "${package}.service.HelloService")
     protected HelloService helloService;
 
     public HelloService getHelloService() {
