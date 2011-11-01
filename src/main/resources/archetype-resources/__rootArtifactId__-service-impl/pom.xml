@@ -47,6 +47,7 @@
 					<apiDir>${basedir}/../${rootArtifactId}-service/src/main/java</apiDir>
 					<pluginType>portlet</pluginType>
 					<postBuildDependencyModules>false</postBuildDependencyModules>
+					<pluginName>${rootArtifactId}</pluginName>
 				</configuration>
 			</plugin>
 
