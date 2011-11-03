@@ -46,8 +46,12 @@
 				<configuration>
 					<apiDir>${basedir}/../${rootArtifactId}-service/src/main/java</apiDir>
 					<pluginType>portlet</pluginType>
-					<postBuildDependencyModules>false</postBuildDependencyModules>
 					<pluginName>${rootArtifactId}</pluginName>
+					<!-- to work with maven 3 -->
+					<postBuildDependencyModules>false</postBuildDependencyModules>
+					<!-- disable -->
+					<springDynamicDataSourceFileName>null</springDynamicDataSourceFileName>
+					<springShardDataSourceFileName>null</springShardDataSourceFileName>
 				</configuration>
 			</plugin>
 

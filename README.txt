@@ -3,10 +3,10 @@ It can be used even for Service Builder based plugins, it is up to you.
 
 ######
 NOTICE : before you read this or clone this, you should know that it would be better for you to use official liferay portlet archetype
-https://github.com/liferay/liferay-portal/tree/master/support-maven
- 
+https://github.com/liferay/liferay-maven-support
+
 I am maintaining this for a long time, because a year or two ago this wasn't available, now Service Builder Archetype :
-https://github.com/liferay/liferay-portal/tree/master/support-maven/archetypes/liferay-servicebuilder-archetype
+https://github.com/liferay/liferay-maven-support/archetypes/liferay-servicebuilder-archetype
 has even a separate module for API, though you have to use Maven 2, because it is using maven-reactor-plugin. 
 Or you have to specify postBuildDependencyModules=false property in liferay-maven-plugin
 ######
@@ -36,6 +36,9 @@ In all cases modify Portlet and Liferay specific assets : portlet.xml, liferay-p
  delete   service-impl/src/main/resources/META-INF/portlet-spring.xml
  modify  service-impl/src/main/webapp/WEB-INF/service.xml
  delete   *.java files
+ modify  project-service-impl/pom.xml - liferay-maven-plugin is customizable, I disabled DB sharding and dynamic data source swapping,
+                                        so that it won't generate corresponding spring xml
+                                      - you must delete them from spring.configs list in service.properties
 
 cd project-service-impl
 mvn com.liferay.maven.plugins:liferay-maven-plugin:6.1.0-SNAPSHOT:build-service 
